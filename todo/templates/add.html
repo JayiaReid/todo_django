@@ -1,0 +1,123 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add a Task</title>
+    <style>
+        :root {
+            --primary-color: #1E90FF; /* Blue Primary */
+            --background-color: #121212; /* Dark Background */
+            --text-color: #E0E0E0; /* Light Text */
+            --button-color: #1E90FF; /* Primary Blue Button */
+            --button-hover: #1565C0; /* Darker Blue for Hover */
+            --border-radius: 10px;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+        }
+
+        header {
+            width: 100%;
+            max-width: 600px;
+            margin-bottom: 30px;
+            padding: 50px;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin: 20px 0;
+            color: var(--primary-color);
+        }
+
+        form {
+            background-color: #2a2a2a;
+            padding: 20px;
+            border-radius: var(--border-radius);
+            width: 100%;
+            max-width: 600px;
+        }
+
+        label {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            font-size: 1rem;
+            border-radius: var(--border-radius);
+            border: none;
+            background-color: #333;
+            color: var(--text-color);
+        }
+
+        button {
+            display: inline-block;
+            background-color: var(--button-color);
+            color: white;
+            padding: 10px 20px;
+            font-size: 1rem;
+            border: none;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            margin-top: 15px;
+        }
+
+        button:hover {
+            background-color: var(--button-hover);
+            transform: scale(1.05);
+        }
+
+        footer {
+            margin-top: auto;
+            font-size: 0.9rem;
+            color: #B0BEC5;
+        }
+        .cta-button {
+            display: inline-block;
+            margin-top: 20px;
+            color: white;
+            padding: 15px 30px;
+            font-size: 1rem;
+            border: none;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .cta-button:hover {
+            color: var(--button-hover);
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Add a New To-Do</h1>
+    </header>
+
+    <form method="POST">
+        {% csrf_token %}
+        <label for="task">Task:</label>
+        <input type="text" name="task" id="task" required>
+        <button type="submit">Add Task</button>
+    </form>
+
+    <a href="/list" class="cta-button">Back to To-Do List</a>
+</body>
+</html>

@@ -1,0 +1,113 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stuco: To-Do List</title>
+    <style>
+        :root {
+            --primary-color: #1E90FF; /* Blue Primary */
+            --background-color: #121212; /* Dark Background */
+            --text-color: #E0E0E0; /* Light Text */
+            --button-color: #1E90FF; /* Primary Blue Button */
+            --button-hover: #1565C0; /* Darker Blue for Hover */
+            --border-radius: 10px;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+        }
+
+        header {
+            width: 100%;
+            max-width: 600px;
+            margin-bottom: 30px;
+            padding: 50px;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin: 20px 0;
+            color: var(--primary-color);
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            width: 100%;
+            max-width: 600px;
+            margin: 20px 0;
+        }
+
+        li {
+            background-color: #2a2a2a;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: var(--border-radius);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--primary-color);
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: var(--button-color);
+            color: white;
+            padding: 15px 30px;
+            font-size: 1rem;
+            border: none;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .cta-button:hover {
+            background-color: var(--button-hover);
+            transform: scale(1.05);
+        }
+
+        footer {
+            margin-top: auto;
+            font-size: 0.9rem;
+            color: #B0BEC5;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Stuco To-Do List</h1>
+        <p>Manage your tasks efficiently!</p>
+    </header>
+
+    <h2>Your To-Do List</h2>
+    <ul>
+        {% for todo in todos %}
+            <li>
+                {{ todo.task }}
+                {% if not todo.completed %}
+                    <a href="{% url 'complete_todo' todo.id %}">Mark as Completed</a>
+                {% else %}
+                    <span>Completed</span>
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+
+    <a href="/add" class="cta-button">Add New Task</a>
+</body>
+</html>
